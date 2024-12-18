@@ -25,4 +25,5 @@
 
 <h3> Roadmap </h3>
 
+- [ ] Add more code block functionality
 - [ ] Add this as an Obsidian extension.
