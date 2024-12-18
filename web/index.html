@@ -3,23 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRML</title>
+    <title>Homerow Markup Language Editor</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Home-row Markup Language</h1>
+        <h1>Homerow Markup Language Editor</h1>
         <div class="editor-container">
             <div class="toolbar">
-                <button onclick="insertMarkup('jf ')">Heading</button>
-                <button onclick="insertMarkup('js ', ' sj')">Bold</button>
-                <button onclick="insertMarkup('ja ')">List Item</button>
+                <div class="toolbar-group">
+                    <button onclick="insertMarkup('jf ')">H1</button>
+                    <button onclick="insertMarkup('jff ')">H2</button>
+                    <button onclick="insertMarkup('jfff ')">H3</button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="insertMarkup('js ', ' sj')">Bold</button>
+                    <button onclick="insertMarkup('jd ', ' dj')">Italic</button>
+                    <button onclick="insertMarkup('ju ', ' uj')">Underline</button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="insertMarkup('ja ')">• List</button>
+                    <button onclick="insertMarkup('jl ')">1. List</button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="insertLink()">Link</button>
+                    <button onclick="insertImage()">Image</button>
+                    <button onclick="insertCodeBlock()">Code</button>
+                </div>
+
+                <div class="toolbar-group">
+                    <button onclick="insertQuote()">Quote</button>
+                    <button onclick="insertNestedQuote()">Nested Quote</button>
+                    <button onclick="insertHorizontalRule()">Rule</button>
+                </div>
             </div>
+
             <div class="panels">
                 <div class="input-panel">
-                    <textarea id="editor" placeholder="jf Welcome to HRML"></textarea>
+                    <div class="panel-header">Editor</div>
+                    <textarea id="editor" placeholder="Start typing with Homerow Markup..."></textarea>
                 </div>
                 <div class="output-panel">
+                    <div class="panel-header">Preview</div>
                     <div id="preview"></div>
                 </div>
             </div>
