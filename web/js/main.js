@@ -1,17 +1,15 @@
-// Import WASM at the top of the file
 import init, { MarkupParserWrapper } from '../wasm/markup_parser.js';
 
 let editor = document.getElementById('editor');
 let preview = document.getElementById('preview');
 let parser = null;
 
-// Initialize the parser
 async function initParser() {
     try {
         await init();
         parser = new MarkupParserWrapper();
         console.log("Parser initialized!");
-        updatePreview(); // Initial preview
+        updatePreview();
     } catch (error) {
         console.error("Parser initialization failed:", error);
     }
@@ -46,17 +44,13 @@ function insertMarkup(prefix, suffix = '') {
     editor.value = newText;
     updatePreview();
 
-    // Reset cursor position
     let newPosition = start + prefix.length + (selectedText || 'text').length + suffix.length;
     editor.setSelectionRange(newPosition, newPosition);
     editor.focus();
 }
 
-// Add event listener for input
 editor.addEventListener('input', updatePreview);
 
-// Make insertMarkup available globally
 window.insertMarkup = insertMarkup;
 
-// Initialize when the page loads
 initParser();
