@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markup Parser</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Markup Parser</h1>
+        <div class="editor-container">
+            <div class="toolbar">
+                <button onclick="insertMarkup('jf ')">Heading</button>
+                <button onclick="insertMarkup('js ', ' sj')">Bold</button>
+                <button onclick="insertMarkup('ja ')">List Item</button>
+            </div>
+            <div class="panels">
+                <div class="input-panel">
+                    <textarea id="editor" placeholder="Start typing..."></textarea>
+                </div>
+                <div class="output-panel">
+                    <div id="preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Make both scripts type="module" -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
