@@ -22,20 +22,22 @@ impl MarkupParser
     {
         MarkupParser
         {
-            heading_regex: Regex::new(r"(j[f]+)\s+([^\n]+)").unwrap(),
-            bold_regex: Regex::new(r"js\s*(.+?)\s*sj").unwrap(),
-            italic_regex: Regex::new(r"jd\s*(.+?)\s*dj").unwrap(),
-            underline_regex: Regex::new(r"ju\s*(.+?)\s*uj").unwrap(),
-            ulist_regex: Regex::new(r"ja\s+([^\n]+)").unwrap(),
-            olist_regex: Regex::new(r"jl\s+([^\n]+)").unwrap(),
-            link_regex: Regex::new(r"jg\s+(.+?)\s+gh\s+(.+?)\s+hg").unwrap(),
-            image_regex: Regex::new(r"jh\s+(.+?)\s+gh\s+(.+?)\s+hj").unwrap(),
-            code_block_regex: Regex::new(r"jkd(?:\s+(\w+))?\s*([\s\S]*?)\s*dkj").unwrap(),
-            quote_regex: Regex::new(r"(j[d]+)\s+([^\n]+)").unwrap(),
-            hr_regex: Regex::new(r"js\s*$").unwrap(),
+            heading_regex: Regex::new(r"(j[f]+)\s+([^\n]+)").unwrap(), //headings
+            bold_regex: Regex::new(r"js\s*(.+?)\s*sj").unwrap(), //bold
+            italic_regex: Regex::new(r"jd\s*(.+?)\s*dj").unwrap(), //italic
+            underline_regex: Regex::new(r"ju\s*(.+?)\s*uj").unwrap(), //underline
+            ulist_regex: Regex::new(r"ja\s+([^\n]+)").unwrap(), //unordered list
+            olist_regex: Regex::new(r"jl\s+([^\n]+)").unwrap(), //ordered list
+            link_regex: Regex::new(r"jg\s+(.+?)\s+gh\s+(.+?)\s+hg").unwrap(), //links
+            image_regex: Regex::new(r"jh\s+(.+?)\s+gh\s+(.+?)\s+hj").unwrap(), //images
+            code_block_regex: Regex::new(r"jkd(?:\s+(\w+))?\s*([\s\S]*?)\s*dkj").unwrap(), //code block
+            quote_regex: Regex::new(r"(kl)\s+([^\n]+)").unwrap(), //quote
+            hr_regex: Regex::new(r"js\s*$").unwrap(), //horizontal rule
         }
     }
 
+    //self refers to the instance of markup parser, ampersand means reference
+    //takes in a string and returns a vector of nodes
     pub fn parse(&self, text: &str) -> Vec<Node>
     {
         let mut nodes = Vec::new();

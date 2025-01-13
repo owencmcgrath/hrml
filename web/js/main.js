@@ -82,11 +82,11 @@ function insertCodeBlock() {
 }
 
 function insertQuote() {
-    insertMarkup('jd ', ' dj\n');
+    insertMarkup('kl ', '\n');
 }
 
 function insertNestedQuote() {
-    insertMarkup('jdd ', ' dj\n');
+    insertMarkup('kll ', '\n');
 }
 
 // Add event listener for input
