@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export function init_panic_hook(): void;
 export class MarkupParserWrapper {
   free(): void;
   constructor();
@@ -15,10 +16,11 @@ export interface InitOutput {
   readonly markupparserwrapper_new: () => number;
   readonly markupparserwrapper_parse_to_html: (a: number, b: number, c: number) => [number, number];
   readonly markupparserwrapper_test_parser: (a: number) => [number, number];
-  readonly __wbindgen_export_0: WebAssembly.Table;
+  readonly init_panic_hook: () => void;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_export_3: WebAssembly.Table;
   readonly __wbindgen_start: () => void;
 }
 
