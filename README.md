@@ -34,4 +34,6 @@ https://github.com/user-attachments/assets/d6626b35-5a52-4ea9-8148-bc5f7e817ad5
 <h3> Roadmap </h3>
 
 - [ ] Add more code block functionality
-- [ ] Add this as an Obsidian extension.
+- [ ] Add this as an Obsidian extension
+- [ ] Literally refactor the whole codebase, lol
+      
