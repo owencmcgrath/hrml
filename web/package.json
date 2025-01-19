@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "html2pdf.js": "^0.10.1",
+    "highlight.js": "^11.7.0"
   }
 }
