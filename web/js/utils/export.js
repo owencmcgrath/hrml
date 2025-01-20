@@ -44,35 +44,43 @@ export class Exporter {
      * @param {Object} options - Optional configuration overrides
      * @returns {Promise<void>}
      */
-    async toPDF(element, options = {}) {
-        try {
-            events.emit('export-start', {
-                type: 'pdf'
-            });
+     async toPDF(element, options = {}) {
+         const indicator = document.getElementById('exportIndicator');
+         try {
+             // Show loading indicator
+             if (indicator) {
+                 indicator.style.display = 'flex';
+             }
 
-            const mergedOptions = {
-                ...Exporter.PDF_OPTIONS,
-                ...options,
-                filename: options.filename || `document-${new Date().toISOString()}.pdf`
-            };
+             const opt = {
+                 margin: 1,
+                 filename: 'hrml-document.pdf',
+                 image: { type: 'jpeg', quality: 0.98 },
+                 html2canvas: {
+                     scale: 2,
+                     useCORS: true,
+                     logging: false
+                 },
+                 jsPDF: {
+                     unit: 'in',
+                     format: 'letter',
+                     orientation: 'portrait'
+                 },
+                 ...options
+             };
 
-            await html2pdf()
-                .set(mergedOptions)
-                .from(element)
-                .save();
+             await html2pdf().set(opt).from(element).save();
 
-            events.emit('export-success', {
-                type: 'pdf'
-            });
-        } catch (error) {
-            console.error('PDF export failed:', error);
-            events.emit('export-error', {
-                type: 'pdf',
-                error
-            });
-            throw new Error(`PDF export failed: ${error.message}`);
-        }
-    }
+         } catch (error) {
+             console.error('PDF export failed:', error);
+             throw error;
+         } finally {
+             // Hide loading indicator
+             if (indicator) {
+                 indicator.style.display = 'none';
+             }
+         }
+     }
 
     /**
      * Exports content as HTML

@@ -5,17 +5,23 @@ import { events } from './utils/events.js';
 
 async function initializeApp() {
     try {
-        // Initialize core components in order
+        // Initialize core components
         const state = AppState.getInstance();
         const parser = ParserManager.getInstance();
         await parser.initialize();
 
+        // Initialize editor
         const editor = new Editor();
 
+        // Set up global error handling
         window.addEventListener('error', (e) => {
             console.error('Global error:', e);
+            const state = AppState.getInstance();
             state.showNotification('An error occurred', 'error');
         });
+
+        // Make parser globally available if needed
+        window.parser = parser;
 
     } catch (error) {
         console.error('Failed to initialize application:', error);

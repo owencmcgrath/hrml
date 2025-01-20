@@ -49,6 +49,23 @@ export class Editor {
 
         this.bindEvents();
         this.loadContent();
+
+        events.on('export-start', () => {
+            const indicator = document.getElementById('exportIndicator');
+            if (indicator) indicator.classList.add('show');
+        });
+
+        events.on('export-success', () => {
+            const indicator = document.getElementById('exportIndicator');
+            if (indicator) indicator.classList.remove('show');
+            this.state.showNotification('Export completed successfully');
+        });
+
+        events.on('export-error', ({ error }) => {
+            const indicator = document.getElementById('exportIndicator');
+            if (indicator) indicator.classList.remove('show');
+            this.state.showNotification(`Export failed: ${error.message}`, 'error');
+        });
     }
 
     bindEvents() {
@@ -98,10 +115,10 @@ export class Editor {
         });
 
         // Export functionality
-        events.bindEvents('exportPDF', [{
-            type: 'click',
-            handler: () => this.exportToPDF()
-        }]);
+        // events.bindEvents('exportPDF', [{
+        //     type: 'click',
+        //     handler: () => this.exportToPDF()
+        // }]);
 
         // Theme toggle
         events.bindEvents('darkModeToggle', [{
@@ -147,9 +164,12 @@ export class Editor {
         }]);
 
         const exportButton = document.getElementById('exportPDF');
-        if (exportButton) {
-            exportButton.addEventListener('click', () => this.exportToPDF());
-        }
+            if (exportButton) {
+                // Remove any existing click listeners first
+                exportButton.removeEventListener('click', this.exportToPDF.bind(this));
+                // Add single click listener
+                exportButton.addEventListener('click', this.exportToPDF.bind(this));
+            }
 
         // Handle window unload
         window.addEventListener('beforeunload', () => {
@@ -228,11 +248,16 @@ export class Editor {
     }
 
     async exportToPDF() {
+        const indicator = document.getElementById('exportIndicator');
         try {
+            if (indicator) indicator.style.display = 'flex';
             await exporter.toPDF(this.preview);
+            this.state.showNotification('Export completed successfully');
         } catch (error) {
             console.error('Export failed:', error);
             this.state.showNotification('Failed to export PDF', 'error');
+        } finally {
+            if (indicator) indicator.style.display = 'none';
         }
     }
 

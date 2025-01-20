@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="toolbar-group">
-                    <button onclick="exportToPDF()">Export to PDF</button>
+                    <button id="exportPDF" class="toolbar-button" data-action="export">Export to PDF</button>
                 </div>
             </div>
 
@@ -71,7 +71,13 @@
         <div id="wordCounter" class="word-counter">
             Words: 0 | Characters: 0
         </div>
-    </body>div>
+        <div id="notification" class="notification"></div>
+        <div id="exportIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <span>Exporting PDF...</span>
+        </div>
+        </div>
+    </body>
 
     <!-- Load WASM module first -->
     <script type="module">
