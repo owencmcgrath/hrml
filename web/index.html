@@ -19,40 +19,36 @@
         <div class="editor-container">
             <div class="toolbar">
                 <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="h1">H1</button>
-                    <button class="toolbar-button" data-action="h2">H2</button>
-                    <button class="toolbar-button" data-action="h3">H3</button>
+                    <button onclick="insertMarkup('jf ')">H1</button>
+                    <button onclick="insertMarkup('jff ')">H2</button>
+                    <button onclick="insertMarkup('jfff ')">H3</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="bold">Bold</button>
-                    <button class="toolbar-button" data-action="italic">Italic</button>
-                    <button class="toolbar-button" data-action="underline">Underline</button>
+                    <button onclick="insertMarkup('js ', ' sj')">Bold</button>
+                    <button onclick="insertMarkup('jd ', ' dj')">Italic</button>
+                    <button onclick="insertMarkup('ju ', ' uj')">Underline</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="ulist">• List</button>
-                    <button class="toolbar-button" data-action="olist">1. List</button>
+                    <button onclick="insertMarkup('ja ')">• List</button>
+                    <button onclick="insertMarkup('jl ')">1. List</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="link">Link</button>
-                    <button class="toolbar-button" data-action="image">Image</button>
-                    <button class="toolbar-button" data-action="code">Code</button>
+                    <button onclick="insertLink()">Link</button>
+                    <button onclick="insertImage()">Image</button>
+                    <button onclick="insertCodeBlock()">Code</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="quote">Quote</button>
-                    <button class="toolbar-button" data-action="nested-quote">Nested Quote</button>
-                    <button class="toolbar-button" data-action="hr">Rule</button>
+                    <button onclick="insertQuote()">Quote</button>
+                    <button onclick="insertNestedQuote()">Nested Quote</button>
+                    <button onclick="insertHorizontalRule()">Rule</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button id="exportPDF" class="toolbar-button" data-action="export-pdf">Export to PDF</button>
-                    <button id="darkModeToggle" class="theme-toggle">
-                        <span class="sun">🌞</span>
-                        <span class="moon">🌙</span>
-                    </button>
+                    <button onclick="exportToPDF()">Export to PDF</button>
                 </div>
             </div>
 
@@ -67,31 +63,24 @@
                 </div>
             </div>
         </div>
-
-        <div class="status-bar">
-            <div id="saveIndicator" class="save-indicator">Changes saved</div>
-            <div id="wordCounter" class="word-counter">Words: 0 | Characters: 0</div>
+        <button id="darkModeToggle" class="theme-toggle">
+            <span class="sun">🌞</span>
+            <span class="moon">🌙</span>
+        </button>
+        <div id="saveIndicator" class="save-indicator">Changes saved</div>
+        <div id="wordCounter" class="word-counter">
+            Words: 0 | Characters: 0
         </div>
+    </body>div>
 
-        <div id="debug-panel" class="debug-panel" style="display: none;">
-            <div class="panel-header">Debug Output</div>
-            <pre id="debug-output"></pre>
-        </div>
-    </div>
-
-    <div id="notification" class="notification"></div>
-    <div id="exportIndicator" class="loading-indicator" style="display: none;">
-        <div class="spinner"></div>
-        <span>Exporting PDF...</span>
-    </div>
-
+    <!-- Load WASM module first -->
     <script type="module">
+        // Initialize WASM module
         import init, { MarkupParserWrapper } from './wasm/markup_parser.js';
         window.wasmModule = { init, MarkupParserWrapper };
     </script>
 
     <script>hljs.highlightAll();</script>
-
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
