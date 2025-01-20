@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="toolbar-group">
-                    <button id="exportPDF">Export to PDF</button>
+                    <button id="exportPDF" class="toolbar-button" data-action="export-pdf">Export to PDF</button>
                     <button id="darkModeToggle" class="theme-toggle">
                         <span class="sun">🌞</span>
                         <span class="moon">🌙</span>
@@ -80,9 +80,9 @@
     </div>
 
     <div id="notification" class="notification"></div>
-    <div id="exportIndicator" class="loading-indicator">
+    <div id="exportIndicator" class="loading-indicator" style="display: none;">
         <div class="spinner"></div>
-        <span>Exporting...</span>
+        <span>Exporting PDF...</span>
     </div>
 
     <script type="module">

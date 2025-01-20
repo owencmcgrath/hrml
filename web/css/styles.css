@@ -1,4 +1,8 @@
+/* ==========================================================================
+   Variables & Root Styles
+   ========================================================================== */
 :root {
+    /* Colors */
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --secondary: #64748b;
@@ -6,11 +10,16 @@
     --surface: #ffffff;
     --text: #1e293b;
     --border: #e2e8f0;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 body {
     margin: 0;
     padding: 20px;
@@ -27,6 +36,9 @@ blockquote {
     margin: 10px 0;
 }
 
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -44,6 +56,9 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
+/* ==========================================================================
+   Editor Components
+   ========================================================================== */
 .editor-container {
     background: var(--surface);
     border-radius: 12px;
@@ -52,6 +67,7 @@ h1 {
     border: 1px solid var(--border);
 }
 
+/* Toolbar Styles */
 .toolbar {
     padding: 15px;
     background: var(--surface);
@@ -91,7 +107,6 @@ h1 {
     transform: translateY(0);
 }
 
-/* Group similar buttons */
 .toolbar-group {
     display: flex;
     gap: 4px;
@@ -100,13 +115,15 @@ h1 {
     border-radius: 10px;
 }
 
+/* Panel Styles */
 .panels {
     display: flex;
     min-height: 500px;
     background: var(--bg);
 }
 
-.input-panel, .output-panel {
+.input-panel,
+.output-panel {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -126,6 +143,7 @@ h1 {
     font-size: 0.9rem;
 }
 
+/* Text Area Styles */
 textarea {
     flex: 1;
     width: 100%;
@@ -143,6 +161,9 @@ textarea:focus {
     outline: none;
 }
 
+/* ==========================================================================
+   Preview Styles
+   ========================================================================== */
 #preview {
     flex: 1;
     padding: 20px;
@@ -151,8 +172,9 @@ textarea:focus {
     line-height: 1.6;
 }
 
-/* Preview Element Styling */
-#preview h1, #preview h2, #preview h3 {
+#preview h1,
+#preview h2,
+#preview h3 {
     margin-top: 0;
     color: var(--text);
     font-weight: 700;
@@ -208,59 +230,9 @@ textarea:focus {
     border-bottom-style: solid;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .panels {
-        flex-direction: column;
-    }
-
-    .input-panel {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-    }
-
-    textarea, #preview {
-        min-height: 300px;
-    }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--secondary);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.editor-container {
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@media print {
-    .pdf-content {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        max-width: 8.5in; /* Letter size width */
-    }
-}
-
+/* ==========================================================================
+   UI Components
+   ========================================================================== */
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -271,113 +243,6 @@ textarea:focus {
     background: #f0f0f0;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.dark-mode {
-    background-color: #1a1a1a;
-    color: #fff;
-}
-
-/* Editor styles in dark mode */
-.dark-mode textarea {
-    background-color: #2d2d2d;
-    color: #fff;
-    border-color: #444;
-}
-
-/* Preview panel in dark mode */
-.dark-mode .output-panel {
-    background-color: #2d2d2d;
-    color: #fff !important; /* Force white text in preview panel */
-}
-
-.dark-mode .output-panel #preview {
-    background-color: #2d2d2d;
-    color: #fff !important;
-}
-
-/* Button styles in dark mode */
-.dark-mode button {
-    background-color: #3d3d3d;
-    color: #fff;
-    border: 1px solid #555;
-}
-
-.dark-mode button:hover {
-    background-color: #4d4d4d;
-}
-
-/* Panel headers in dark mode */
-.dark-mode .panel-header {
-    background-color: #2d2d2d;
-    color: #fff;
-    border-bottom: 1px solid #444;
-}
-
-/* Toolbar in dark mode */
-.dark-mode .toolbar {
-    background-color: #2d2d2d;
-    border-color: #444;
-}
-
-.dark-mode .toolbar-group {
-    border-color: #444;
-}
-
-/* Container background in dark mode */
-.dark-mode .editor-container {
-    background-color: #2d2d2d;
-    border-color: #444;
-}
-
-/* Word counter in dark mode */
-.dark-mode .word-counter {
-    background-color: #2d2d2d;
-    color: #fff;
-    border: 1px solid #444;
-}
-
-/* Save indicator in dark mode */
-.dark-mode .save-indicator {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-/* Code blocks in dark mode */
-.dark-mode pre {
-    background-color: #2d2d2d;
-    border: 1px solid #444;
-}
-
-.dark-mode code {
-    color: #fff;
-}
-
-/* Links in dark mode */
-.dark-mode a {
-    color: #66b3ff;
-}
-
-.dark-mode a:hover {
-    color: #99ccff;
-}
-
-/* Blockquotes in dark mode */
-.dark-mode blockquote {
-    background-color: #333;
-    border-left: 4px solid #666;
-}
-
-.dark-mode .output-panel h1,
-.dark-mode .output-panel h2,
-.dark-mode .output-panel h3,
-.dark-mode .output-panel h4,
-.dark-mode .output-panel h5,
-.dark-mode .output-panel h6,
-.dark-mode .output-panel p,
-.dark-mode .output-panel li,
-.dark-mode .output-panel blockquote {
-    color: #fff !important;
 }
 
 .save-indicator {
@@ -406,17 +271,180 @@ textarea:focus {
     font-size: 14px;
 }
 
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   Dark Mode Styles
+   ========================================================================== */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.dark-mode textarea {
+    background-color: #2d2d2d;
+    color: #fff;
+    border-color: #444;
+}
+
+.dark-mode .output-panel {
+    background-color: #2d2d2d;
+    color: #fff !important;
+}
+
+.dark-mode .output-panel #preview {
+    background-color: #2d2d2d;
+    color: #fff !important;
+}
+
+.dark-mode button {
+    background-color: #3d3d3d;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.dark-mode button:hover {
+    background-color: #4d4d4d;
+}
+
+.dark-mode .panel-header {
+    background-color: #2d2d2d;
+    color: #fff;
+    border-bottom: 1px solid #444;
+}
+
+.dark-mode .toolbar {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+.dark-mode .toolbar-group {
+    border-color: #444;
+}
+
+.dark-mode .editor-container {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
 .dark-mode .word-counter {
+    background-color: #2d2d2d;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.dark-mode pre,
+.dark-mode code {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode a {
+    color: #66b3ff;
+}
+
+.dark-mode a:hover {
+    color: #99ccff;
+}
+
+.dark-mode blockquote {
+    background-color: #333;
+    border-left: 4px solid #666;
+}
+
+.dark-mode .panels {
     background-color: #2d2d2d;
 }
 
-/* For the editor textarea and preview div */
-textarea, #preview {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+.dark-mode #preview blockquote {
+    background-color: #333;
+    color: #fff !important;
+    border-left: 4px solid #666;
 }
 
-/* For Webkit browsers (Chrome, Safari, etc.) */
+.dark-mode #preview blockquote blockquote {
+    background-color: #2d2d2d;
+    color: #fff !important;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.editor-container {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media (max-width: 768px) {
+    .panels {
+        flex-direction: column;
+    }
+
+    .input-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    textarea,
+    #preview {
+        min-height: 300px;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+    .pdf-content {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        max-width: 8.5in;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+textarea,
+#preview {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 textarea::-webkit-scrollbar,
 #preview::-webkit-scrollbar {
     display: none;
@@ -429,32 +457,4 @@ textarea::-webkit-scrollbar,
 
 *::-webkit-scrollbar {
     display: none;
-}
-
-.dark-mode .panels {
-    background-color: #2d2d2d;
-}
-
-.dark-mode .input-panel textarea {
-    background-color: #2d2d2d;
-    color: #fff;
-}
-
-/* Ensure code blocks are readable */
-.dark-mode pre,
-.dark-mode code {
-    background-color: #333;
-    color: #fff;
-}
-
-.dark-mode #preview blockquote {
-    background-color: #333; /* Dark background */
-    color: #fff !important; /* White text */
-    border-left: 4px solid #666;
-}
-
-/* Nested quotes in dark mode */
-.dark-mode #preview blockquote blockquote {
-    background-color: #2d2d2d; /* Slightly different shade for nested quotes */
-    color: #fff !important;
 }

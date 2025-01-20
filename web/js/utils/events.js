@@ -74,7 +74,13 @@ export class EventManager {
     // Keyboard shortcuts
     bindShortcuts(shortcuts) {
         document.addEventListener('keydown', (e) => {
-            shortcuts.forEach(({ key, ctrl, alt, shift, callback }) => {
+            shortcuts.forEach(({
+                key,
+                ctrl,
+                alt,
+                shift,
+                callback
+            }) => {
                 if (e.key.toLowerCase() === key.toLowerCase() &&
                     e.ctrlKey === !!ctrl &&
                     e.altKey === !!alt &&
@@ -91,7 +97,10 @@ export class EventManager {
         const element = document.getElementById(elementId);
         if (!element) return null;
 
-        const cleanupFunctions = events.map(({ type, handler }) => {
+        const cleanupFunctions = events.map(({
+            type,
+            handler
+        }) => {
             const wrappedHandler = this.debounce(handler);
             element.addEventListener(type, wrappedHandler);
             return () => element.removeEventListener(type, wrappedHandler);
