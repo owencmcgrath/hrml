@@ -8,7 +8,6 @@ export class Exporter {
         if (Exporter.#instance) {
             return Exporter.#instance;
         }
-        this.state = AppState.getInstance();
         Exporter.#instance = this;
     }
 
@@ -23,7 +22,10 @@ export class Exporter {
     static PDF_OPTIONS = {
         margin: 1,
         filename: 'hrml-document.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
         html2canvas: {
             scale: 2,
             useCORS: true,
@@ -44,7 +46,9 @@ export class Exporter {
      */
     async toPDF(element, options = {}) {
         try {
-            events.emit('export-start', { type: 'pdf' });
+            events.emit('export-start', {
+                type: 'pdf'
+            });
 
             const mergedOptions = {
                 ...Exporter.PDF_OPTIONS,
@@ -57,10 +61,15 @@ export class Exporter {
                 .from(element)
                 .save();
 
-            events.emit('export-success', { type: 'pdf' });
+            events.emit('export-success', {
+                type: 'pdf'
+            });
         } catch (error) {
             console.error('PDF export failed:', error);
-            events.emit('export-error', { type: 'pdf', error });
+            events.emit('export-error', {
+                type: 'pdf',
+                error
+            });
             throw new Error(`PDF export failed: ${error.message}`);
         }
     }
@@ -72,19 +81,28 @@ export class Exporter {
      */
     toHTML(element) {
         try {
-            events.emit('export-start', { type: 'html' });
+            events.emit('export-start', {
+                type: 'html'
+            });
 
             const html = element.innerHTML;
-            const blob = new Blob([html], { type: 'text/html' });
+            const blob = new Blob([html], {
+                type: 'text/html'
+            });
             const url = URL.createObjectURL(blob);
 
             this.downloadFile(url, 'document.html');
-            events.emit('export-success', { type: 'html' });
+            events.emit('export-success', {
+                type: 'html'
+            });
 
             return html;
         } catch (error) {
             console.error('HTML export failed:', error);
-            events.emit('export-error', { type: 'html', error });
+            events.emit('export-error', {
+                type: 'html',
+                error
+            });
             throw new Error(`HTML export failed: ${error.message}`);
         }
     }
@@ -96,18 +114,27 @@ export class Exporter {
      */
     toText(content) {
         try {
-            events.emit('export-start', { type: 'text' });
+            events.emit('export-start', {
+                type: 'text'
+            });
 
-            const blob = new Blob([content], { type: 'text/plain' });
+            const blob = new Blob([content], {
+                type: 'text/plain'
+            });
             const url = URL.createObjectURL(blob);
 
             this.downloadFile(url, 'document.txt');
-            events.emit('export-success', { type: 'text' });
+            events.emit('export-success', {
+                type: 'text'
+            });
 
             return content;
         } catch (error) {
             console.error('Text export failed:', error);
-            events.emit('export-error', { type: 'text', error });
+            events.emit('export-error', {
+                type: 'text',
+                error
+            });
             throw new Error(`Text export failed: ${error.message}`);
         }
     }

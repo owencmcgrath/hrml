@@ -61,7 +61,10 @@ export class AppState {
     }
 
     updateThemeIcons() {
-        const { sunIcon, moonIcon } = this.themeElements;
+        const {
+            sunIcon,
+            moonIcon
+        } = this.themeElements;
         if (this.darkMode) {
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
@@ -133,7 +136,9 @@ export class AppState {
             darkMode: this.darkMode,
             content: this.content,
             debugMode: this.debugMode,
-            uiState: { ...this.uiState },
+            uiState: {
+                ...this.uiState
+            },
             lastSaved: this.uiState.lastSaved?.toISOString()
         };
     }
