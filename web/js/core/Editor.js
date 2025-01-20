@@ -82,8 +82,29 @@ export class Editor {
         events.delegate(document.body, 'click', '.toolbar-button', (e, target) => {
             const action = target.dataset.action;
             switch (action) {
-                case 'hr':
-                    this.insertHorizontalRule();
+                case 'h1':
+                    this.insertMarkup('jf ', '\n', true);  // Add newline suffix
+                    break;
+                case 'h2':
+                    this.insertMarkup('jff ', '\n', true);  // Add newline suffix
+                    break;
+                case 'h3':
+                    this.insertMarkup('jfff ', '\n', true);  // Add newline suffix
+                    break;
+                case 'bold':
+                    this.insertMarkup('js ', ' sj');
+                    break;
+                case 'italic':
+                    this.insertMarkup('jd ', ' dj');
+                    break;
+                case 'underline':
+                    this.insertMarkup('ju ', ' uj');
+                    break;
+                case 'ulist':
+                    this.insertMarkup('ja ', '\n', true);  // Add newline suffix
+                    break;
+                case 'olist':
+                    this.insertMarkup('jl ', '\n', true);  // Add newline suffix
                     break;
                 case 'link':
                     this.insertLink();
@@ -100,14 +121,11 @@ export class Editor {
                 case 'nested-quote':
                     this.insertNestedQuote();
                     break;
-                case 'bold':
-                    this.insertMarkup('js', 'sj');
+                case 'hr':
+                    this.insertHorizontalRule();
                     break;
-                case 'italic':
-                    this.insertMarkup('jd', 'dj');
-                    break;
-                case 'underline':
-                    this.insertMarkup('ju', 'uj');
+                case 'export-pdf':
+                    this.exportToPDF();
                     break;
                 default:
                     console.warn(`Unknown toolbar action: ${action}`);
@@ -207,22 +225,29 @@ export class Editor {
         const text = this.editor.value;
         const selectedText = text.slice(start, end);
 
-        const prependNewline = (ensureNewline && start > 0 && text[start - 1] !== '\n') ? '\n' : '';
-        const appendNewline = (ensureNewline && !suffix.endsWith('\n')) ? '\n' : '';
+        // Always add newline before block-level elements if we're not at the start of the document
+        const isBlockLevel = prefix.match(/^(jf+|ja|jl|kl)/);
+        const prependNewline = (ensureNewline && start > 0 && text[start - 1] !== '\n' && isBlockLevel) ? '\n' : '';
+
+        // Always add newline after block-level elements
+        const appendNewline = (ensureNewline && (!suffix.endsWith('\n') && isBlockLevel)) ? '\n' : '';
 
         const newText = text.slice(0, start) +
-            prependNewline +
-            prefix +
-            selectedText +
-            suffix +
-            appendNewline +
-            text.slice(end);
+                       prependNewline +
+                       prefix +
+                       (selectedText || '') +  // Use empty string if no selection
+                       suffix +
+                       appendNewline +
+                       text.slice(end);
 
         this.editor.value = newText;
         this.state.saveContent(newText);
         this.updatePreview();
 
-        const newPosition = start + prependNewline.length + prefix.length + selectedText.length + suffix.length;
+        // Position cursor after the insertion
+        const newPosition = start + prependNewline.length + prefix.length +
+                           (selectedText || '').length +
+                           (suffix ? suffix.length : 0);
         this.editor.setSelectionRange(newPosition, newPosition);
         this.editor.focus();
     }

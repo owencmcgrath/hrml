@@ -19,36 +19,36 @@
         <div class="editor-container">
             <div class="toolbar">
                 <div class="toolbar-group">
-                    <button onclick="insertMarkup('jf ')">H1</button>
-                    <button onclick="insertMarkup('jff ')">H2</button>
-                    <button onclick="insertMarkup('jfff ')">H3</button>
+                    <button class="toolbar-button" data-action="h1">H1</button>
+                    <button class="toolbar-button" data-action="h2">H2</button>
+                    <button class="toolbar-button" data-action="h3">H3</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button onclick="insertMarkup('js ', ' sj')">Bold</button>
-                    <button onclick="insertMarkup('jd ', ' dj')">Italic</button>
-                    <button onclick="insertMarkup('ju ', ' uj')">Underline</button>
+                    <button class="toolbar-button" data-action="bold">Bold</button>
+                    <button class="toolbar-button" data-action="italic">Italic</button>
+                    <button class="toolbar-button" data-action="underline">Underline</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button onclick="insertMarkup('ja ')">• List</button>
-                    <button onclick="insertMarkup('jl ')">1. List</button>
+                    <button class="toolbar-button" data-action="ulist">• List</button>
+                    <button class="toolbar-button" data-action="olist">1. List</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button onclick="insertLink()">Link</button>
-                    <button onclick="insertImage()">Image</button>
-                    <button onclick="insertCodeBlock()">Code</button>
+                    <button class="toolbar-button" data-action="link">Link</button>
+                    <button class="toolbar-button" data-action="image">Image</button>
+                    <button class="toolbar-button" data-action="code">Code</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button onclick="insertQuote()">Quote</button>
-                    <button onclick="insertNestedQuote()">Nested Quote</button>
-                    <button onclick="insertHorizontalRule()">Rule</button>
+                    <button class="toolbar-button" data-action="quote">Quote</button>
+                    <button class="toolbar-button" data-action="nested-quote">Nested Quote</button>
+                    <button class="toolbar-button" data-action="hr">Rule</button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button id="exportPDF" class="toolbar-button" data-action="export">Export to PDF</button>
+                    <button id="exportPDF" class="toolbar-button" data-action="export-pdf">Export to PDF</button>
                 </div>
             </div>
 
