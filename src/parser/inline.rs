@@ -3,28 +3,17 @@ use super::MarkupParser;
 
 impl MarkupParser {
     pub(super) fn parse_inline_elements_impl(&self, line: &str) -> Option<Node> {
-        // Handle Links
         if let Some(cap) = self.patterns.link.captures(line) {
             let mut node = Node::new("a");
-            node.attributes.insert(
-                "href".to_string(),
-                cap[2].trim().to_string()
-            );
+            node.attributes.insert("href".to_string(), cap[2].trim().to_string());
             node.content = Some(cap[1].trim().to_string());
             return Some(node);
         }
 
-        // Handle Images
         if let Some(cap) = self.patterns.image.captures(line) {
             let mut node = Node::new("img");
-            node.attributes.insert(
-                "alt".to_string(),
-                cap[1].trim().to_string()
-            );
-            node.attributes.insert(
-                "src".to_string(),
-                cap[2].trim().to_string()
-            );
+            node.attributes.insert("alt".to_string(), cap[1].trim().to_string());
+            node.attributes.insert("src".to_string(), cap[2].trim().to_string());
             return Some(node);
         }
 
@@ -59,36 +48,33 @@ impl MarkupParser {
     fn collect_inline_segments(&self, text: &str) -> Vec<(usize, usize, String, String)> {
         let mut segments = Vec::new();
 
-        // Bold
         for cap in self.patterns.bold.captures_iter(text) {
             let full_match = cap.get(0).unwrap();
             segments.push((
                 full_match.start(),
                 full_match.end(),
                 "strong".to_string(),
-                cap[1].to_string()
+                cap[1].to_string(),
             ));
         }
 
-        // Italic
         for cap in self.patterns.italic.captures_iter(text) {
             let full_match = cap.get(0).unwrap();
             segments.push((
                 full_match.start(),
                 full_match.end(),
                 "em".to_string(),
-                cap[1].to_string()
+                cap[1].to_string(),
             ));
         }
 
-        // Underline
         for cap in self.patterns.underline.captures_iter(text) {
             let full_match = cap.get(0).unwrap();
             segments.push((
                 full_match.start(),
                 full_match.end(),
                 "u".to_string(),
-                cap[1].to_string()
+                cap[1].to_string(),
             ));
         }
 

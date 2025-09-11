@@ -21,18 +21,18 @@ jg [check out my other work!] gh [https://owencmcgrath.com] hg`;
 export const DEBOUNCE_DELAY = 250;
 
 export const PDF_OPTIONS = {
-    margin: 1,
-    filename: 'hrml-document.pdf',
-    image: {
-        type: 'jpeg',
-        quality: 0.98
-    },
-    html2canvas: {
-        scale: 2
-    },
-    jsPDF: {
-        unit: 'in',
-        format: 'letter',
-        orientation: 'portrait'
-    }
+  margin: 1,
+  filename: "hrml-document.pdf",
+  image: {
+    type: "jpeg",
+    quality: 0.98,
+  },
+  html2canvas: {
+    scale: 2,
+  },
+  jsPDF: {
+    unit: "in",
+    format: "letter",
+    orientation: "portrait",
+  },
 };

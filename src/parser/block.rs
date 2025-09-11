@@ -3,22 +3,21 @@ use super::MarkupParser;
 
 impl MarkupParser {
     pub(super) fn parse_block_elements_impl(&self, line: &str) -> Option<Node> {
-        // HR
         if self.patterns.hr.is_match(line) {
             return Some(Node::new("hr"));
         }
 
-        // Headings
         if let Some(cap) = self.patterns.heading.captures(line) {
-            let level = line.chars()
-                .take_while(|&c| c == 'j' || c == 'f')
-                .count() - 1;
+            let level =
+                line
+                    .chars()
+                    .take_while(|&c| (c == 'j' || c == 'f'))
+                    .count() - 1;
             let mut node = Node::new(&format!("h{}", level));
             node.content = Some(cap[1].trim().to_string());
             return Some(node);
         }
 
-        // Nested Quotes
         if let Some(cap) = self.patterns.nested_quote.captures(line) {
             let mut outer_node = Node::new("blockquote");
             let mut inner_node = Node::new("blockquote");
@@ -28,7 +27,6 @@ impl MarkupParser {
             return Some(outer_node);
         }
 
-        // Regular Quotes
         if let Some(cap) = self.patterns.quote.captures(line) {
             let mut node = Node::new("blockquote");
             let quote_content = cap[1].trim();
@@ -58,7 +56,7 @@ impl MarkupParser {
         line: &str,
         lines: &mut std::iter::Peekable<std::str::Lines>,
         list_type: &str,
-        pattern: &regex::Regex,
+        pattern: &regex::Regex
     ) -> Node {
         let mut list_node = Node::new(list_type);
         let mut current_line = line;
@@ -74,8 +72,10 @@ impl MarkupParser {
             match lines.peek() {
                 Some(next_line) if pattern.is_match(next_line.trim()) => {
                     current_line = lines.next().unwrap().trim();
-                },
-                _ => break
+                }
+                _ => {
+                    break;
+                }
             }
         }
         list_node

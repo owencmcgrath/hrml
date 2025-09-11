@@ -1,6 +1,5 @@
-// wasm.rs
 use wasm_bindgen::prelude::*;
-use web_sys::console;  // For console logging
+use web_sys::console; // For console logging
 use crate::parser::MarkupParser;
 
 #[wasm_bindgen]
@@ -17,7 +16,7 @@ impl MarkupParserWrapper {
         console::log_1(&"Initializing MarkupParserWrapper".into());
 
         Self {
-            parser: MarkupParser::new()
+            parser: MarkupParser::new(),
         }
     }
 
@@ -39,11 +38,7 @@ impl MarkupParserWrapper {
 
     #[wasm_bindgen]
     pub fn test_parser(&self) -> String {
-        let test_cases = vec![
-            "js bold text sj",
-            "ja list item",
-            "kl quote"
-        ];
+        let test_cases = vec!["js bold text sj", "ja list item", "kl quote"];
 
         let mut results = String::new();
         for test in test_cases {

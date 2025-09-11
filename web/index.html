@@ -79,9 +79,7 @@
         </div>
     </body>
 
-    <!-- Load WASM module first -->
     <script type="module">
-        // Initialize WASM module
         import init, { MarkupParserWrapper } from './wasm/markup_parser.js';
         window.wasmModule = { init, MarkupParserWrapper };
     </script>

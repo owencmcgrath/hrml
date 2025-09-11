@@ -22,13 +22,11 @@ impl MarkupParser {
         while let Some(line) = lines.next() {
             let line = line.trim();
 
-            // Skip empty lines outside code blocks
             if line.is_empty() && !in_code_block {
                 nodes.push(Node::new("br"));
                 continue;
             }
 
-            // Handle code block markers without rendering them
             if self.patterns.code_block.is_match(line) {
                 in_code_block = true;
                 if let Some(cap) = self.patterns.code_block.captures(line) {
@@ -57,17 +55,15 @@ impl MarkupParser {
                     code_content.clear();
                     code_language.clear();
                 }
-                continue;  // Skip rendering the end marker
+                continue; // Skip rendering the end marker
             }
 
-            // Handle code block content
             if in_code_block {
                 code_content.push_str(line);
                 code_content.push('\n');
                 continue;
             }
 
-            // Regular parsing for non-code content
             if let Some(node) = self.parse_block_elements(line) {
                 nodes.push(node);
                 continue;
