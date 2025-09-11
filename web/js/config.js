@@ -14,7 +14,7 @@ jkd python
 print("this is so much better than Markdown, right? ;)")
 dkj
 jffff cool car!
-jh [dream car, really] gh [https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/823337c1eb4bc7e0ffc884d3eaf1fb22.jpg] hj
+jh [dream car, really] gh [https://www.pcarmarket.com/static/media/uploads/galleries/photos/uploads/galleries/10821-vbautosports-996-gt2/.thumbnails/TRS_0786.jpg/TRS_0786-tiny-2048x0-0.5x0.jpg] hj
 js
 jg [check out my other work!] gh [https://owencmcgrath.com] hg`;
 
