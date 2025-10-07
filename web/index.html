@@ -1,90 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homerow Markup Language Editor</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xcode.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>Homerow Markup Language</h1>
-        <div class="editor-container">
-            <div class="toolbar">
-                <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="h1">H1</button>
-                    <button class="toolbar-button" data-action="h2">H2</button>
-                    <button class="toolbar-button" data-action="h3">H3</button>
-                </div>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Homerow Markup Language Editor
+		</title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code&display=swap"
+		rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xcode.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>
+				Homerow Markup Language
+			</h1>
+			<div class="editor-container">
+				<div class="toolbar">
+					<div class="toolbar-group">
+						<button class="toolbar-button" data-action="h1">
+							H1
+						</button>
+						<button class="toolbar-button" data-action="h2">
+							H2
+						</button>
+						<button class="toolbar-button" data-action="h3">
+							H3
+						</button>
+					</div>
+					<div class="toolbar-group">
+						<button class="toolbar-button" data-action="bold">
+							Bold
+						</button>
+						<button class="toolbar-button" data-action="italic">
+							Italic
+						</button>
+						<button class="toolbar-button" data-action="underline">
+							Underline
+						</button>
+					</div>
+					<div class="toolbar-group">
+						<button class="toolbar-button" data-action="ulist">
+							• List
+						</button>
+						<button class="toolbar-button" data-action="olist">
+							1. List
+						</button>
+					</div>
+					<div class="toolbar-group">
+						<button class="toolbar-button" data-action="link">
+							Link
+						</button>
+						<button class="toolbar-button" data-action="image">
+							Image
+						</button>
+						<button class="toolbar-button" data-action="code">
+							Code
+						</button>
+					</div>
+					<div class="toolbar-group">
+						<button class="toolbar-button" data-action="quote">
+							Quote
+						</button>
+						<button class="toolbar-button" data-action="nested-quote">
+							Nested Quote
+						</button>
+						<button class="toolbar-button" data-action="hr">
+							Rule
+						</button>
+					</div>
+					<div class="toolbar-group">
+						<button id="exportPDF" class="toolbar-button" data-action="export-pdf">
+							Export to PDF
+						</button>
+					</div>
+				</div>
+				<div class="panels">
+					<div class="input-panel">
+						<div class="panel-header">
+							Editor
+						</div>
+						<textarea id="editor" placeholder="Start typing with Homerow Markup...">
+						</textarea>
+					</div>
+					<div class="output-panel">
+						<div class="panel-header">
+							Preview
+						</div>
+						<div id="preview">
+						</div>
+					</div>
+				</div>
+			</div>
+			<button id="darkModeToggle" class="theme-toggle">
+				<span class="sun">
+					🌞
+				</span>
+				<span class="moon">
+					🌙
+				</span>
+			</button>
+			<div id="saveIndicator" class="save-indicator">
+				Changes saved
+			</div>
+			<div id="wordCounter" class="word-counter">
+				Words: 0 | Characters: 0
+			</div>
+			<div id="notification" class="notification">
+			</div>
+			<div id="exportIndicator" class="loading-indicator" style="display: none;">
+				<div class="spinner">
+				</div>
+				<span>
+					Exporting PDF...
+				</span>
+			</div>
+		</div>
+	</body>
+	<script type="module">
+		import init,
+		{
+			MarkupParserWrapper
+		}
+		from './wasm/markup_parser.js';
+		window.wasmModule = {
+			init,
+			MarkupParserWrapper
+		};
+	</script>
+	<script>
+		hljs.highlightAll();
+	</script>
+	<script type="module" src="js/main.js">
+	</script>
+	</body>
 
-                <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="bold">Bold</button>
-                    <button class="toolbar-button" data-action="italic">Italic</button>
-                    <button class="toolbar-button" data-action="underline">Underline</button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="ulist">• List</button>
-                    <button class="toolbar-button" data-action="olist">1. List</button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="link">Link</button>
-                    <button class="toolbar-button" data-action="image">Image</button>
-                    <button class="toolbar-button" data-action="code">Code</button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="toolbar-button" data-action="quote">Quote</button>
-                    <button class="toolbar-button" data-action="nested-quote">Nested Quote</button>
-                    <button class="toolbar-button" data-action="hr">Rule</button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button id="exportPDF" class="toolbar-button" data-action="export-pdf">Export to PDF</button>
-                </div>
-            </div>
-
-            <div class="panels">
-                <div class="input-panel">
-                    <div class="panel-header">Editor</div>
-                    <textarea id="editor" placeholder="Start typing with Homerow Markup..."></textarea>
-                </div>
-                <div class="output-panel">
-                    <div class="panel-header">Preview</div>
-                    <div id="preview"></div>
-                </div>
-            </div>
-        </div>
-        <button id="darkModeToggle" class="theme-toggle">
-            <span class="sun">🌞</span>
-            <span class="moon">🌙</span>
-        </button>
-        <div id="saveIndicator" class="save-indicator">Changes saved</div>
-        <div id="wordCounter" class="word-counter">
-            Words: 0 | Characters: 0
-        </div>
-        <div id="notification" class="notification"></div>
-        <div id="exportIndicator" class="loading-indicator" style="display: none;">
-            <div class="spinner"></div>
-            <span>Exporting PDF...</span>
-        </div>
-        </div>
-    </body>
-
-    <script type="module">
-        import init, { MarkupParserWrapper } from './wasm/markup_parser.js';
-        window.wasmModule = { init, MarkupParserWrapper };
-    </script>
-
-    <script>hljs.highlightAll();</script>
-    <script type="module" src="js/main.js"></script>
-</body>
 </html>
